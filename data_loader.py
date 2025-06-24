@@ -20,8 +20,7 @@ class DataLoader():
     # Beispiel: Pfade anpassen an deinen Speicherort
     train_images = self.read_images("data/train/train-images.idx3-ubyte") # 0- 59999
     train_labels = self.read_labels("data/train/train-labels.idx1-ubyte") # 0- 59999
-    return {images: train_images, labels: train_labels}
-
+    return {"images": train_images, "labels": train_labels}
 
 
 # # Anzeige
