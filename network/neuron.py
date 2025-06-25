@@ -36,7 +36,7 @@ class Neuron():
         # Check which direction our Pre-Activation-Value would have in act (how much)
         drelu = self.relu_derivative(self.last_pre_actf)
 
-        # Which direction we sould adjust the output 
+        # Mult the change Direction and the amount
         dz = d_out * drelu
 
         # Saving Gradients
