@@ -17,8 +17,8 @@ output_size = 10  # 10 Klassen für Ziffern 0–9
 # Dummy-Initialisierung
 def random_weights(n): return [uniform(-0.1, 0.1) for _ in range(n)]
 
-layer1 = Layer([Neuron(random_weights(input_size), 0.0) for _ in range(input_size)]) # Input
-layer2 = Layer([Neuron(random_weights(input_size), 0.0) for _ in range(hidden_size)]) # Hidden
+layer1 = Layer([Neuron(random_weights(input_size), 0.0) for _ in range(hidden_size)]) # Hidden
+layer2 = Layer([Neuron(random_weights(hidden_size), 0.0) for _ in range(hidden_size)]) # Hidden
 layer3 = Layer([Neuron(random_weights(hidden_size), 0.0) for _ in range(output_size)]) # Output
 
 network = Network([layer1, layer2, layer3])
@@ -38,11 +38,9 @@ for epoch in range(epochs):
         output = network.forward(x)
         loss = network.cross_entropy(output, y)
         total_loss += loss
-
         network.zero_grad()
         network.backward(y)
         network.update_params(learning_rate)
-    print("Neue Epoche")
         
 
     avg_loss = total_loss / len(training_input_images)
