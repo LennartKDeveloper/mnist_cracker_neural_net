@@ -5,11 +5,13 @@ class Network:
 
     def __init__(self, layers):
         self.layers = layers  # Liste von Layer-Objekten
-
     def forward(self, inputs):
         for layer in self.layers:
             inputs = layer.forward(inputs)
+            # print(inputs[0])
+        
         self.last_output = self.softmax(np.array(inputs))
+        # print(f"Softmax: {self.last_output}")
         return self.last_output
 
     def backward(self, target: list[float]):

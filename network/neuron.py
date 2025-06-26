@@ -4,10 +4,11 @@ import numpy as np
 
 class Neuron():
 
-    def __init__(self, weights: list[float], bias: float):
+    def __init__(self, weights: list[float], bias: float, use_relu: bool):
         # Weights and Bias
         self.weights = np.array(weights, dtype=float)
         self.bias = bias
+        self.use_relu = use_relu
 
         # Gradients (How much adjustion)
         self.delta_weights = np.zeros_like(self.weights)
@@ -24,6 +25,8 @@ class Neuron():
         self.last_input = inputs # Save
         z = np.dot(inputs, self.weights) + self.bias
         self.last_pre_actf = z # Save
+        if not self.use_relu:
+            return z
         return self.relu(z)
 
 
@@ -34,14 +37,20 @@ class Neuron():
  # Backwards
     def backward(self, d_out: float) -> np.ndarray:
         # Check which direction our Pre-Activation-Value would have in act (how much)
-        drelu = self.relu_derivative(self.last_pre_actf)
-
-        # Mult the change Direction and the amount
-        dz = d_out * drelu
+        if not self.use_relu:
+          dz = d_out 
+        else:
+          drelu = self.relu_derivative(self.last_pre_actf)
+          # Mult the change Direction and the amount
+          dz = d_out * drelu
 
         # Saving Gradients
         self.delta_weights = dz * self.last_input # Bigger inputs mean bigger adjustion for the weights smaller mean less adjustion
         self.delta_bias = dz
+        # Clipping
+        # max_grad = 5.0
+        # self.delta_weights = np.clip(self.delta_weights, -max_grad, max_grad)
+        # self.delta_bias = np.clip(self.delta_bias, -max_grad, max_grad)
 
         # Gradient für vorherige Schicht (falls verkettet)
         return dz * self.weights  # Bigger weights mean bigger adjustion for the inputs smaller mean less adjustion
@@ -59,8 +68,8 @@ class Neuron():
 
     def zero_grad(self):
         # Reset Gradients
-        self.delta_bias = np.zeros_like(self.weights) # [1.33, 4.23, 43.44] -> [0,0,0]
-        self.delta_weights = 0.0
+        self.delta_weights = np.zeros_like(self.weights) # [1.33, 4.23, 43.44] -> [0,0,0]
+        self.delta_bias = 0.0
     
     
 
