@@ -17,15 +17,15 @@ class DataLoader():
         return labels
     
   def load_mnist_train_data(self):
-    # Beispiel: Pfade anpassen an deinen Speicherort
+    # load Train data in /data/train/
     train_images = self.read_images("data/train/train-images.idx3-ubyte") # 0- 59999
     train_labels = self.read_labels("data/train/train-labels.idx1-ubyte") # 0- 59999
     return {"images": train_images, "labels": train_labels}
+  
+  def load_mnist_test_data(self):
+    # load Test data in /data/test/
+    train_images = self.read_images("data/test/t10k-images.idx3-ubyte") # 0- 59999
+    train_labels = self.read_labels("data/test/t10k-labels.idx1-ubyte") # 0- 59999
+    return {"images": train_images, "labels": train_labels}
 
 
-# # Anzeige
-# import matplotlib.pyplot as plt
-# pos = 0
-# plt.imshow(train_images[pos], cmap='gray')
-# plt.title(f"Label: {train_labels[pos]}")
-# plt.show()
