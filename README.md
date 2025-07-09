@@ -6,7 +6,7 @@ This repository contains a fully from-scratch neural network implementation usin
 ## 📁 Project Structure
 
 ```
-MNIST_CUSTOM/
+mnist_cracker_neural_net/
 ├── data/
 │   ├── train/               # Training images (MNIST format)
 │   └── test/                # Test images (MNIST format)
