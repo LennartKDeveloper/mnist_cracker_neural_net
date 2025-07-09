@@ -1,7 +1,7 @@
 import sys
 import os
 
-# Füge das Parent-Verzeichnis von "training" dem Suchpfad hinzu
+# Get path access to train data
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import math

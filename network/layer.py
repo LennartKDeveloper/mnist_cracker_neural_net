@@ -9,8 +9,7 @@ class Layer:
         return [neuron.forward(inputs) for neuron in self.neurons]
        
     def backward(self, d_outs: list[float]) -> list[float]:
-        # Rückwärtsrichtung: Liste von Gradienten aus nächster Schicht
-        # Addiere die zurückfließenden Gradienten pro Eingabewert
+        # Backpropagation: Calculate gradients for each neuron 
         input_grads = np.zeros_like(self.neurons[0].last_input)
         for d_out, neuron in zip(d_outs, self.neurons):
             input_grads += neuron.backward(d_out)

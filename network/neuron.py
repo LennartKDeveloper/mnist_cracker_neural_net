@@ -18,7 +18,7 @@ class Neuron():
         self.last_input = None
         self.last_pre_actf = None
 
- # Forwards 
+    # Forwards 
     def forward(self, inputs: list[float]) -> float:
         # Inputs X Weights + Bias -> Relu
         inputs = np.array(inputs, dtype=float)
@@ -34,7 +34,7 @@ class Neuron():
         return np.maximum(0, x)
     
 
- # Backwards
+    # Backwards
     def backward(self, d_out: float) -> np.ndarray:
         # Check which direction our Pre-Activation-Value would have in act (how much)
         if not self.use_relu:
@@ -47,12 +47,12 @@ class Neuron():
         # Saving Gradients
         self.delta_weights = dz * self.last_input # Bigger inputs mean bigger adjustion for the weights smaller mean less adjustion
         self.delta_bias = dz
-        # Clipping
+
+        # Clipping (Optional)
         # max_grad = 5.0
         # self.delta_weights = np.clip(self.delta_weights, -max_grad, max_grad)
         # self.delta_bias = np.clip(self.delta_bias, -max_grad, max_grad)
 
-        # Gradient für vorherige Schicht (falls verkettet)
         return dz * self.weights  # Bigger weights mean bigger adjustion for the inputs smaller mean less adjustion
     
     def relu_derivative(self, x: float) -> float:
@@ -60,7 +60,7 @@ class Neuron():
         return 1.0 if x > 0 else 0.0
     
 
- # Additional
+    # Additional
     def update_params(self, learning_rate: float):
         # Update weights and biases based on presaved gradients and the curr learning rate
         self.weights -= learning_rate * self.delta_weights

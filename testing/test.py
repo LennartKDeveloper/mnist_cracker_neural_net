@@ -31,15 +31,15 @@ def evaluate_model(model, images: np.ndarray, labels: np.ndarray) -> float:
     return correct / len(images) * 100
 
 
-# MNIST-Testdaten laden
+# Load MNIST-Testdata 
 test_data = DataLoader().load_mnist_test_data()
 images = test_data["images"] / 255.0  # Normalisierung
 labels = test_data["labels"]
 
-# Modell laden
+# Load Modell
 model = load_model("models/40k_v1_model.pkl")
 
-# Accuracy berechnen
+# Calculate Accuracy
 accuracy = evaluate_model(model, images, labels)
 print(f"Test Accuracy: {accuracy:.2f}%")
 

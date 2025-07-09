@@ -1,18 +1,18 @@
 # config.py
 
-# Netzwerk-Architektur
-INPUT_SIZE = 784        # 28x28 Bilder
+# network architecture
+INPUT_SIZE = 784        # 28x28 Images
 HIDDEN_SIZE = 64
-OUTPUT_SIZE = 10        # 10 Klassen (Ziffern 0–9)
+OUTPUT_SIZE = 10        # 10 classes (Nums 0–9)
 
-# Trainingsdaten
-TRAIN_SIZE = 20      # Anzahl Trainingsbilder
+# training data
+TRAIN_SIZE = 20      # number of training images (up to 60,000)
 
-# Trainingsparameter
+# training parameters
 LEARNING_RATE = 0.001
 EPOCHS = 5
 DECAY_RATE = 0.95
 
-# Initialisierungsparameter
+# initialization parameters
 BIAS_STDDEV = 0.01
 
